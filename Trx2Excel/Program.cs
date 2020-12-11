@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using log4net.Repository.Hierarchy;
 using Trx2Excel.ExcelUtils;
 using Trx2Excel.TrxReaderUtil;
 
@@ -13,6 +8,7 @@ namespace Trx2Excel
     {
         static void Main(string[] args)
         {
+           // args = new []{};
             if (args == null || args.Length < 2)
                throw new Exception("Illegal Number of Argument");
 

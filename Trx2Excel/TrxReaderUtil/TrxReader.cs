@@ -57,6 +57,7 @@ namespace Trx2Excel.TrxReaderUtil
                     PassCount++;
                     break;
                 case TestOutcome.Skipped:
+                case TestOutcome.NotExecuted:
                     SkipCount++;
                     break;
             }

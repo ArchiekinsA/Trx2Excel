@@ -76,6 +76,11 @@ namespace Trx2Excel.ExcelUtils
                     result.Outcome.Equals(TestOutcome.Failed.ToString(), StringComparison.OrdinalIgnoreCase) ?
                     Color.Red :
                     Color.ForestGreen);
+
+                if (result.Outcome == TestOutcome.NotExecuted.ToString())
+                {
+                    sheet.Cells[i, 2].Style.Fill.BackgroundColor.SetColor(Color.Orange);
+                }
                 sheet.Cells[i, 4].Value = result.Message;
                 sheet.Cells[i, 5].Value = result.StrackTrace;
                 i++;
