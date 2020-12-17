@@ -8,7 +8,6 @@ namespace Trx2Excel
     {
         static void Main(string[] args)
         {
-           // args = new []{};
             if (args == null || args.Length < 2)
                throw new Exception("Illegal Number of Argument");
 

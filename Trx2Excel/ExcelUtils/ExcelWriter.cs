@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using OfficeOpenXml;
 using System.Drawing;
+using System.Linq;
 using OfficeOpenXml.Drawing.Chart;
 using OfficeOpenXml.Style;
 using Trx2Excel.Model;
@@ -51,19 +52,24 @@ namespace Trx2Excel.ExcelUtils
 
             using (var package = new ExcelPackage(new System.IO.FileInfo(FileName)))
             {
-                foreach (string nameSpace in filteredData.Keys)
-                    AddSheetToExcel(filteredData, package, nameSpace);
+                var sheet = package.Workbook.Worksheets.Add("Tests");
+                sheet = CreateHeader(sheet);
+               AddSheetToExcel(filteredData,sheet);
                 package.Save();
             }
             
         }
 
-        private void AddSheetToExcel(Dictionary<string, List<UnitTestResult>> filteredData, ExcelPackage package, string nameSpace)
+        private void AddSheetToExcel(Dictionary<string, List<UnitTestResult>> filteredData,  ExcelWorksheet sheet)
         {
-            var sheet = package.Workbook.Worksheets.Add(nameSpace);
-            sheet = CreateHeader(sheet);
             var i = 2;
-            foreach (var result in filteredData[nameSpace])
+            List<UnitTestResult> unitTestResults = new List<UnitTestResult>();
+            foreach (var test in filteredData.Values)
+            {
+                unitTestResults.AddRange(test);
+            }
+
+            foreach (var result in unitTestResults)
             {
                 sheet.Cells[i, 1].Value = result.TestName;
                 sheet.Cells[i, 1].AutoFitColumns();
